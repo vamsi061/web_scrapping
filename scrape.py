@@ -8,6 +8,7 @@ from collections import Counter
 from urllib.parse import urljoin
 from googlesearch import search
 from flask import Flask, request, jsonify
+import os
 from flask_cors import CORS  # <--- Add this
 
 app = Flask(__name__)
@@ -146,4 +147,5 @@ def search_api():
     })
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))  # Use dynamic port if provided
+    app.run(host="0.0.0.0", port=port, debug=True)  # Bind to all interfaces
